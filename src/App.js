@@ -1,38 +1,36 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
-import { AppBar, Toolbar, Typography, Button } from "@mui/material";
-import MessagePage from "./components/MessagePage";
-import NewAccountPage from "./components/NewAccountPage";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Box, Typography, AppBar, Toolbar, Button } from "@mui/material";
+import MatchingPage from "./components/MatchingPage";
+import ResponsePage from "./components/ResponsePage";
 import ProfilePage from "./components/ProfilePage";
+import MessagePage from "./components/MessagePage";
 
-const App = () => {
+// Update Navigation to include Profile, Matches, and Messages
+function App() {
   return (
     <Router>
-      <AppBar position="sticky">
+      <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            Study Group Finder
+            Study Buddy App
           </Typography>
-          <Button color="inherit" component={Link} to="/">
-            Home
-          </Button>
-          <Button color="inherit" component={Link} to="/new-account">
-            New Account
-          </Button>
-          <Button color="inherit" component={Link} to="/profile">
-            Profile
-          </Button>
+          <Button color="inherit" href="/profile">Profile</Button>
+          <Button color="inherit" href="/matching">Matches</Button>
+          <Button color="inherit" href="/messages">Messages</Button>
         </Toolbar>
       </AppBar>
-
       <Routes>
-        <Route path="/" element={<MessagePage />} />
-        <Route path="/new-account" element={<NewAccountPage />} />
-        <Route path="/profile" element={<ProfilePage />} />
+        {/* Set Profile page as the default route */}
+        <Route path="/" element={<ProfilePage />} /> {/* Profile page as home */}
+        <Route path="/profile" element={<ProfilePage />} /> {/* Profile page */}
+        <Route path="/matching" element={<MatchingPage />} /> {/* Matches page */}
+        <Route path="/messages" element={<MessagePage />} /> {/* Messages page */}
+        <Route path="/response/:id" element={<ResponsePage />} /> {/* Response page */}
       </Routes>
     </Router>
   );
-};
+}
 
 export default App;
 
